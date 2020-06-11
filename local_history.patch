@@ -1,0 +1,16 @@
+Index: src/main/kotlin/br/com/eliascoelho911/webscrapingforumaluraapi/repository/TopicoRepository.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/kotlin/br/com/eliascoelho911/webscrapingforumaluraapi/repository/TopicoRepository.kt	(date 1591410270153)
++++ src/main/kotlin/br/com/eliascoelho911/webscrapingforumaluraapi/repository/TopicoRepository.kt	(date 1591410270153)
+@@ -14,7 +14,7 @@
+ @Repository
+ class TopicoRepository {
+     fun buscaTopicosPorCategoria(categoria: String, pagina: Int, filtroTopicos: String): List<Topico> {
+-        val urlSite = "${ConstantesEnderecos.urlForum}$categoria/$pagina"
++        val urlSite = "${ConstantesEnderecos.urlForum}$categoria/$filtroTopicos/$pagina"
+         return buscaTopicos(urlSite)
+     }
+ 

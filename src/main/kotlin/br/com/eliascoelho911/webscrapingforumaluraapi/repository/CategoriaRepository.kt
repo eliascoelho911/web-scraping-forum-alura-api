@@ -1,7 +1,9 @@
 package br.com.eliascoelho911.webscrapingforumaluraapi.repository
 
+import br.com.eliascoelho911.webscrapingforumaluraapi.factory.JsoupConnectionFactory
 import br.com.eliascoelho911.webscrapingforumaluraapi.model.Categoria
-import br.com.eliascoelho911.webscrapingforumaluraapi.model.ConstantesEnderecos
+import br.com.eliascoelho911.webscrapingforumaluraapi.util.URL_FORUM
+import br.com.eliascoelho911.webscrapingforumaluraapi.util.UrlUtil
 import org.jsoup.Jsoup
 import org.springframework.stereotype.Repository
 import kotlin.streams.toList
@@ -9,7 +11,7 @@ import kotlin.streams.toList
 @Repository
 class CategoriaRepository {
     fun buscaCategorias(): List<Categoria> {
-        val body = Jsoup.connect(ConstantesEnderecos.urlForum).get().body()
+        val body = JsoupConnectionFactory().forumConnection().get().body()
 
         val todasCategoriasElement = body
                 .select("fieldset.select-filter > select > option")
@@ -21,7 +23,7 @@ class CategoriaRepository {
                 "categoria-"
             }
             Categoria(it.text(),
-                    "${ConstantesEnderecos.urlForum}$prefixCategoria$categoria",
+                    UrlUtil().colocaUrlForum("$prefixCategoria$categoria"),
                     categoria)
         }.toList()
     }
